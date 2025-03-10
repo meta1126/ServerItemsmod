@@ -11,7 +11,9 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.CompletableFuture;
 
-@Mod.EventBusSubscriber(modid = ServerItemsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+import static com.meta.serveritemsmod.ServerItemsMod.MODID;
+
+@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
     @SubscribeEvent
@@ -24,6 +26,8 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(),new IntroductionItemModelProvider(packOutput
                 , existingFileHelper ));
         generator.addProvider(event.includeClient(),new ENUSLanguageProvider(packOutput));
+        generator.addProvider(event.includeClient(),new JAJPLanguageProvider(packOutput));
+
 
     }
 }

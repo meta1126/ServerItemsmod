@@ -1,7 +1,9 @@
 {
+  "effect.serveritemsmod.fractured_soul": "Fractured Soul",
   "item.serveritemsmod.nomalgateticket": "Nomal GateTicket",
   "item.serveritemsmod.nomalhelpticket": "Nomal HelpTicket",
   "item.serveritemsmod.raergateticket": "Raer GateTicket",
+  "item.serveritemsmod.soulball": "Soul Ball",
   "item.serveritemsmod.superhelpticket": "Super HelpTicket",
   "item.serveritemsmod.superraergateticket": "Super Rear GateTicket",
   "item.serveritemsmod.ultraraergateticket": "Ultra Rear GateTicket"

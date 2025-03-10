@@ -1,21 +1,22 @@
 package com.meta.serveritemsmod;
 
+
+import com.meta.serveritemsmod.entity.ModModelLayers;
+import com.meta.serveritemsmod.event.common.effects.ModEffects;
+import com.meta.serveritemsmod.gui.ModMenuTypes;
 import com.meta.serveritemsmod.items.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -27,7 +28,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -71,7 +71,18 @@ public class ServerItemsMod
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
+        ModEffects.MOB_EFFECTS.register(modEventBus);
+
         ModItems.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+
+        ModEntities.register(modEventBus);
+
+        ModMenuTypes.MENUS.register(modEventBus);
+
+        MinecraftForge.EVENT_BUS.register(DeathPenaltySystem.class);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigHandler.CONFIG_SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -85,6 +96,8 @@ public class ServerItemsMod
         LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
 
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+
+
     }
 
     // Add the example block item to the building blocks tab

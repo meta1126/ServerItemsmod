@@ -30,7 +30,7 @@ public class ModItems {
     public static final RegistryObject<Item> ULTRARAERGATETICKET = ITEMS.register("ultraraergateticket",
             () -> new Item(new Item.Properties()));
 
-    public static final RegistryObject<Item> SOULBALL = ITEMS.register("soulball", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> SOULBALL = ITEMS.register("soulball", () -> new SoulBallItem(new Item.Properties().stacksTo(16)));
 
     public static void register(IEventBus eventBus) {ITEMS.register(eventBus);}
 }
